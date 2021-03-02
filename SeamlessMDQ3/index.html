@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <body>
+            <h1>Patient Information</h1>
+            <div id="debug"></div>
+            <script>
+                fetch("patient.json")
+                    .then(response => response.json())
+                    .then(data => {
+                        let html = '';
+                        console.log(data)
+                        html+= "Name: "+data.name[0].given[0]+" "+data.name[0].family[0] + "\n"
+                        html+= "Organization name: "+data.managingOrganization.display + "\n"
+                        html+= "Gender: "+data.gender + "\n"
+                        html+="Number of conditions: "+data.conditions.length+"\n"
+                        html+= "List of conditions: "+"\n"
+                        for(i in data.conditions) {
+                            html+="- "+data.conditions[i]+"\n"
+                        }
+                        document.querySelector("#debug").innerText = html
+                    })
+            </script>
+        </body>
+    </head>
+</html>
